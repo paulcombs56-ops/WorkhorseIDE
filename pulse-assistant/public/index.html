@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1b5cff" />
+  <title>Pulse Desk</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Phone + PC</p>
+        <h1>Pulse Desk</h1>
+        <p class="subhead">Keep tasks, reminders, and notes in one sync pocket.</p>
+      </div>
+      <div class="hero-actions">
+        <button id="install-btn" class="ghost">Install App</button>
+        <span id="sync-status" class="status-pill">Offline</span>
+      </div>
+    </header>
+
+    <section class="sync-card">
+      <label for="sync-code">Sync code</label>
+      <div class="row">
+        <input id="sync-code" type="text" maxlength="32" placeholder="Pick a private code" />
+        <button id="connect-btn">Connect</button>
+        <button id="pull-btn" class="ghost">Pull</button>
+        <button id="push-btn" class="ghost">Push</button>
+      </div>
+      <p class="hint">Use the same sync code on your phone and PC to share data locally through this app.</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Tasks</h2>
+        <div class="row">
+          <input id="task-input" type="text" placeholder="Add a task" />
+          <button id="task-add">Add</button>
+        </div>
+        <ul id="task-list" class="list"></ul>
+      </article>
+
+      <article class="card">
+        <h2>Reminders</h2>
+        <div class="row">
+          <input id="reminder-input" type="text" placeholder="Add a reminder" />
+          <button id="reminder-add">Add</button>
+        </div>
+        <ul id="reminder-list" class="list"></ul>
+      </article>
+
+      <article class="card notes-card">
+        <h2>Notes</h2>
+        <textarea id="notes-input" rows="10" placeholder="Capture ideas, plans, and quick snippets"></textarea>
+      </article>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

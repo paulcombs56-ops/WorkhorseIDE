@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workhorse IDE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="toolbar">
+  <button id="run-btn">⚡ Run</button>
+  <button id="format-btn">✨ Format Code</button>
+
+  <select id="language-select">
+    <option value="javascript">JavaScript</option>
+    <option value="python">Python</option>
+  </select>
+
+  <button id="clear-console-btn">🗑️ Clear Console</button>
+
+  <button id="analyze-btn" title="Analyze code for issues">🔍 Analyze</button>
+  <button id="refactor-btn" title="Refactor selected code">♻️ Refactor</button>
+  <button id="docs-btn" title="Generate documentation">📚 Generate Docs</button>
+  <button id="ai-health-btn" title="Check AI backend status">🤖 AI Status</button>
+
+  <select id="console-theme">
+    <option value="dark">Dark</option>
+    <option value="neon">Neon</option>
+    <option value="hacker">Hacker Green</option>
+  </select>
+</div>
+
+<div id="workspace-layout">
+  <div id="workspace-main">
+    <div id="workspace-top">
+      <aside id="file-explorer-panel">
+        <div id="file-explorer-header">Files</div>
+        <div id="file-explorer-tree"></div>
+      </aside>
+
+      <div class="panel-resizer vertical" id="left-panel-resizer" aria-label="Resize explorer"></div>
+
+      <div id="sandbox-container">
+        <div id="editor"></div>
+      </div>
+
+      <div class="panel-resizer vertical" id="right-panel-resizer" aria-label="Resize AI panel"></div>
+
+      <div id="blueprint-drawer">
+        <div id="blueprint-drawer-header">
+          <div class="drawer-header-content">
+            <span>📋 Blueprint</span>
+            <span id="ai-status-badge" class="ai-status unknown">Unknown</span>
+          </div>
+          <button id="blueprint-drawer-toggle" class="drawer-toggle-btn" aria-label="Toggle blueprint drawer" title="Toggle (Ctrl+Shift+D)">▼</button>
+        </div>
+        <div id="blueprint-drawer-body" class="drawer-sections">
+          <!-- Consult Results Tab -->
+          <div id="drawer-consult-section" class="drawer-section" hidden>
+            <div class="drawer-section-header" tabindex="0" role="button" aria-expanded="true">💬 Consult Results</div>
+            <div class="drawer-section-content">
+              <div id="consult-results"></div>
+            </div>
+          </div>
+
+          <!-- Blueprint Operations Tab -->
+          <div id="drawer-blueprint-section" class="drawer-section">
+            <div class="drawer-section-header" tabindex="0" role="button" aria-expanded="true">🔨 Operations</div>
+            <div class="drawer-section-content">
+              <div id="operations-list"></div>
+              <div id="blueprint-preview">No blueprint operations to preview yet.</div>
+            </div>
+          </div>
+
+          <!-- Undo History Tab -->
+          <div id="drawer-undo-section" class="drawer-section">
+            <div class="drawer-section-header" tabindex="0" role="button" aria-expanded="false">↩️ Undo History</div>
+            <div class="drawer-section-content">
+              <div id="undo-history-list"></div>
+              <div style="margin-top: 8px; display: flex; gap: 8px;">
+                <button id="undo-history-restore-btn" type="button" disabled>Restore Selected</button>
+                <button id="undo-history-clear-btn" type="button">Clear History</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drawer Footer -->
+          <div id="drawer-footer" style="border-top: 1px solid #444; padding: 12px; display: flex; gap: 8px; margin-top: 12px;">
+            <button id="blueprint-approve-btn" type="button" disabled>✓ Approve</button>
+            <button id="blueprint-reject-btn" type="button">✕ Reject</button>
+            <button id="blueprint-inspect-btn" type="button">Inspect ▼</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Composer Row (below editor, above console) -->
+    <div id="composer-section">
+      <!-- Context Chips Row -->
+      <div id="context-chips-row" class="context-chips-row">
+        <span class="chips-label">Context:</span>
+        <div id="context-chips-container" class="chips-container"></div>
+        <button id="context-add-btn" class="context-add-btn" type="button" title="Add context (Ctrl+K)">+ Add</button>
+      </div>
+
+      <!-- Composer Container -->
+      <div id="composer-container" class="composer-container">
+        <textarea
+          id="composer-input"
+          class="composer-input"
+          placeholder="What do you want to do? Describe code changes, refactors, or questions."
+          aria-label="Composer input"
+          rows="1"
+        ></textarea>
+        <div class="composer-hint">Shift+Enter for newline, Enter to send</div>
+      </div>
+
+      <!-- Mode Buttons Row -->
+      <div id="mode-buttons-row" class="mode-buttons-row">
+        <button id="mode-consult-btn" class="mode-button mode-button--active" type="button" title="Ask clarifying questions (Ctrl+Shift+C)">💬 Consult</button>
+        <button id="mode-blueprint-btn" class="mode-button" type="button" title="Plan operations (Ctrl+Shift+B)">📋 Blueprint</button>
+        <button id="mode-forge-btn" class="mode-button" type="button" title="Execute operations (Ctrl+Shift+F)" disabled>⚒️ Forge</button>
+        <button id="mode-refresh-btn" class="mode-button" type="button" title="Rerun last operation">🔄 Refresh</button>
+        <button id="composer-send-btn" class="mode-button mode-button--send" type="button" title="Send (Enter)" disabled>→ Send</button>
+      </div>
+
+      <!-- Old Workflow Panel (hidden for backward compat) -->
+      <div id="agent-workflow-panel" style="display: none;">
+        <div id="agent-workflow-header">Agent Workflow</div>
+        <textarea
+          id="agent-request-input"
+          rows="3"
+          placeholder="(Old UI - hidden)"
+          style="display: none;"
+        ></textarea>
+        <div id="agent-workflow-actions">
+          <button id="agent-consult-btn" type="button">Consult</button>
+          <button id="agent-blueprint-btn" type="button">Blueprint</button>
+          <button id="agent-approve-btn" type="button" disabled>Approve Blueprint</button>
+          <button id="agent-forge-btn" type="button" disabled>Forge</button>
+          <button id="agent-undo-btn" type="button" disabled>Undo Last</button>
+        </div>
+        <div id="agent-history-row">
+          <select id="agent-history-select">
+            <option value="">Undo history (latest first)</option>
+          </select>
+          <button id="agent-history-refresh-btn" type="button">Refresh</button>
+          <button id="agent-history-undo-btn" type="button" disabled>Undo Selected</button>
+        </div>
+        <label id="agent-risk-override-row" for="agent-force-high-risk">
+          <input id="agent-force-high-risk" type="checkbox" /> Force high-risk operations (delete/config/system files)
+        </label>
+        <div id="agent-model-row">
+          <label for="agent-claude-model-select">Claude mode</label>
+          <select id="agent-claude-model-select">
+            <option value="auto">Auto (by task)</option>
+            <option value="claude-opus-4-6">claude-opus-4-6</option>
+            <option value="claude-sonnet-4-6">claude-sonnet-4-6</option>
+            <option value="claude-haiku-4-5">claude-haiku-4-5</option>
+          </select>
+        </div>
+        <div id="agent-resolution-actions" hidden></div>
+        <div id="agent-blueprint-preview">No blueprint operations to preview yet.</div>
+        <div id="agent-workflow-status">No blueprint approved.</div>
+      </div>
+
+      <!-- Chat Container (hidden for backward compat) -->
+      <div id="chat-container" style="display: none;">
+        <div id="chat-messages"></div>
+        <div id="chat-input-row">
+          <input id="chat-input" type="text" placeholder="Ask AI to generate code or create files..." />
+          <button id="chat-send-btn">Send</button>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="panel-resizer horizontal" id="console-resizer" aria-label="Resize console"></div>
+    <div id="console-container">
+      <div id="console"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Context Picker Modal -->
+<div id="context-picker-modal" class="modal" hidden>
+  <div class="modal-backdrop"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Add Context</h3>
+      <button class="modal-close-btn" id="context-picker-close-btn" type="button" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <input
+        id="context-picker-search"
+        type="text"
+        class="context-picker-search"
+        placeholder="Search files..."
+        aria-label="Search context"
+      />
+      <div class="context-picker-sections">
+        <section class="context-picker-section">
+          <h4>Recent Files</h4>
+          <div id="context-picker-recent" class="context-picker-list"></div>
+        </section>
+        <section class="context-picker-section">
+          <h4>Open Tabs</h4>
+          <div id="context-picker-tabs" class="context-picker-list"></div>
+        </section>
+        <section class="context-picker-section">
+          <h4>Terminal Output</h4>
+          <div id="context-picker-terminal" class="context-picker-list"></div>
+        </section>
+        <section class="context-picker-section">
+          <h4>Workspace Files</h4>
+          <div id="context-picker-workspace" class="context-picker-list"></div>
+        </section>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button id="context-picker-cancel-btn" type="button">Cancel</button>
+      <button id="context-picker-add-btn" type="button" disabled>Add Selected</button>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/monaco/vs/loader.js"></script>
+<script src="aiService.js"></script>
+<script src="consoleModule.js"></script>
+<script src="editorModule.js"></script>
+<script src="executionModule.js"></script>
+<script src="explorerModule.js"></script>
+<script src="panelResizerModule.js"></script>
+<script src="chatRenderModule.js"></script>
+<script src="chatModule.js"></script>
+<script src="aiFeaturesModule.js"></script>
+<script src="contextModule.js"></script>
+<script src="composerModule.js"></script>
+<script src="drawerModule.js"></script>
+<script src="contextPickerModal.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
+
+

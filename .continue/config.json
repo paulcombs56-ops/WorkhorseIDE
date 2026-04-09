@@ -1,0 +1,56 @@
+{
+  "models": [
+    {
+      "title": "Qwen2.5 Coder 14B (Local)",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:14b",
+      "apiBase": "http://localhost:11434"
+    },
+    {
+      "title": "Qwen2.5 Coder 7B (Fast)",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:7b",
+      "apiBase": "http://localhost:11434"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Qwen2.5 Coder 7B (Fast)",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:7b",
+    "apiBase": "http://localhost:11434"
+  },
+  "contextProviders": [
+    {
+      "name": "code"
+    },
+    {
+      "name": "docs"
+    },
+    {
+      "name": "terminal"
+    },
+    {
+      "name": "diff"
+    },
+    {
+      "name": "problems"
+    },
+    {
+      "name": "folder"
+    }
+  ],
+  "slashCommands": [
+    {
+      "name": "edit",
+      "description": "Propose targeted code edits"
+    },
+    {
+      "name": "test",
+      "description": "Suggest test/run commands"
+    },
+    {
+      "name": "explain",
+      "description": "Explain selected code"
+    }
+  ]
+}

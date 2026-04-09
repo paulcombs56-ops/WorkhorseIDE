@@ -1,0 +1,9 @@
+model: ollama/qwen2.5-coder:14b
+editor-model: ollama/qwen2.5-coder:7b
+dark-mode: true
+pretty: true
+show-diffs: true
+gitignore: true
+auto-commits: false
+restore-chat-history: true
+watch-files: false

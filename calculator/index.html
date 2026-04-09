@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .calculator { width: 200px; margin: auto; text-align: center; }
+        button { width: 50px; height: 50px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="output" disabled>
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <br>
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <br>
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <br>
+        <button onclick="setOperation('+')">+</button>
+        <button onclick="setOperation('-')">-</button>
+        <button onclick="calculate()">=</button>
+    </div>
+
+    <script>
+        let currentInput = '';
+        let operation = null;
+        let firstOperand = null;
+
+        function appendNumber(number) {
+            currentInput += number;
+            document.getElementById('output').value = currentInput;
+        }
+
+        function setOperation(op) {
+            if (currentInput === '') return;
+            if (firstOperand !== null) calculate();
+            operation = op;
+            firstOperand = parseFloat(currentInput);
+            currentInput = '';
+        }
+
+        function calculate() {
+            if (operation === null || currentInput === '') return;
+            const secondOperand = parseFloat(currentInput);
+            let result;
+            switch (operation) {
+                case '+':
+                    result = firstOperand + secondOperand;
+                    break;
+                case '-':
+                    result = firstOperand - secondOperand;
+                    break;
+                default:
+                    return;
+            }
+            document.getElementById('output').value = result;
+            currentInput = result.toString();
+            operation = null;
+            firstOperand = null;
+        }
+    </script>
+</body>
+</html>

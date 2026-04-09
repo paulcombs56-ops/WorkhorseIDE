@@ -1,0 +1,18 @@
+{
+  "name": "Pulse Desk",
+  "short_name": "Pulse",
+  "description": "Personal assistant for phone and desktop",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "background_color": "#fff2d8",
+  "theme_color": "#1b5cff",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='26' fill='%231b5cff'/%3E%3Cpath d='M24 88V40h28c16 0 26 8 26 24s-10 24-26 24H24zm20-14h8c7 0 11-4 11-10s-4-10-11-10h-8v20zM84 88V40h20v48H84z' fill='%23fff2d8'/%3E%3C/svg%3E",
+      "sizes": "128x128",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

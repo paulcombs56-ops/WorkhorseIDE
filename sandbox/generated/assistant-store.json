@@ -1,0 +1,34 @@
+{
+  "sessions": {
+    "smoke123": {
+      "notes": [],
+      "tasks": [
+        {
+          "text": "t",
+          "done": false,
+          "id": "1"
+        }
+      ],
+      "reminders": [
+        {
+          "text": "r",
+          "done": false,
+          "id": "r1"
+        }
+      ],
+      "updatedAt": 1774228467544
+    },
+    "smoke-json": {
+      "notes": [],
+      "tasks": [],
+      "reminders": [],
+      "updatedAt": 1774228484740
+    },
+    "smoke-obj": {
+      "notes": [],
+      "tasks": [],
+      "reminders": [],
+      "updatedAt": 1774228498904
+    }
+  }
+}

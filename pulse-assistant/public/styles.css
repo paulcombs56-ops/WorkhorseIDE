@@ -1,0 +1,236 @@
+:root {
+  --bg-top: #fff2d8;
+  --bg-bottom: #b9f0e0;
+  --panel: #fffdf8;
+  --ink: #13223a;
+  --accent: #1b5cff;
+  --accent-warm: #ff7439;
+  --line: #d8deef;
+  --ok: #0f9d58;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI Variable", "Bahnschrift", "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top right, rgba(255, 116, 57, 0.25), transparent 42%),
+    linear-gradient(170deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+  min-height: 100vh;
+}
+
+.app-shell {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: end;
+  margin-bottom: 14px;
+  animation: slideIn 500ms ease-out;
+}
+
+.eyebrow {
+  margin: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+h1 {
+  margin: 2px 0;
+  font-size: clamp(1.6rem, 4.5vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.subhead {
+  margin: 0;
+  color: #37486a;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-pill {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.82rem;
+}
+
+.sync-card,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgba(17, 34, 64, 0.08);
+}
+
+.sync-card {
+  padding: 14px;
+  margin-bottom: 14px;
+  animation: fadeIn 650ms ease-out;
+}
+
+.hint {
+  margin: 8px 0 0;
+  font-size: 0.86rem;
+  color: #455877;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.card {
+  padding: 14px;
+  animation: fadeIn 700ms ease-out;
+}
+
+.notes-card {
+  grid-column: 1 / -1;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 1.02rem;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--ink);
+  background: #fff;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 220px;
+}
+
+button {
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  filter: brightness(0.95);
+}
+
+button.ghost {
+  background: #fff;
+  color: var(--accent);
+  border: 1px solid var(--line);
+}
+
+.list {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  padding: 8px 10px;
+}
+
+.item-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.item-main.done {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.item-delete {
+  border: 1px solid #ffc8b0;
+  background: #fff2eb;
+  color: #bb3f0f;
+  font-size: 0.82rem;
+  padding: 4px 8px;
+}
+
+.online {
+  border-color: rgba(15, 157, 88, 0.3);
+  color: var(--ok);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .row {
+    flex-wrap: wrap;
+  }
+}
