@@ -860,22 +860,12 @@ html, body {
 }
 
 @media (max-width: 1600px) {
-  #ai-panel {
-    width: 560px;
-    min-width: 380px;
-  }
-
   #file-explorer-panel {
     width: 200px;
   }
 }
 
 @media (max-width: 1366px) {
-  #ai-panel {
-    width: 500px;
-    min-width: 340px;
-  }
-
   #file-explorer-panel {
     width: 180px;
     min-width: 160px;
@@ -896,11 +886,6 @@ html, body {
     gap: 8px;
   }
 
-  #blueprint-drawer {
-    width: 440px;
-    min-width: 300px;
-  }
-
   #file-explorer-panel {
     width: 170px;
     min-width: 150px;
@@ -911,273 +896,206 @@ html, body {
   }
 }
 
-/* ========== NEW UI COMPONENTS ========== */
-
-/* Blueprint Drawer (collapsible right panel) */
-#blueprint-drawer {
-  background: #164179;
-  color: #f4e7dc;
-  border-left: 1px solid #2b67ad;
-  width: 620px;
-  min-width: 420px;
-  max-width: 760px;
-  padding: 0;
+/* Simplified two-pane layout overrides */
+#file-explorer-header {
   display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
-#blueprint-drawer-header {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background: #1a3f72;
-  border-bottom: 1px solid #2b67ad;
-  cursor: pointer;
 }
 
-.drawer-header-content {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  flex: 1;
-}
-
-.drawer-toggle-btn {
-  background: transparent;
-  border: none;
-  color: #f4e7dc;
-  cursor: pointer;
+.explorer-header-btn {
+  background: #1f4f8a;
+  color: #f6ece4;
+  border: 1px solid #2b67ad;
+  border-radius: 4px;
+  font-size: 11px;
   padding: 4px 8px;
-  font-size: 12px;
-}
-
-.drawer-toggle-btn:hover {
-  background: #2b67ad;
-  border-radius: 4px;
-}
-
-#blueprint-drawer-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  flex: 1;
-  overflow: hidden;
-}
-
-#blueprint-drawer.drawer--collapsed #blueprint-drawer-body {
-  display: none;
-}
-
-/* Drawer Sections */
-.drawer-sections {
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  flex: 1;
-  overflow: hidden;
-  padding: 8px;
-  gap: 8px;
-}
-
-.drawer-section {
-  border: 1px solid #2b67ad;
-  border-radius: 4px;
-  background: #0f2f58;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
-.drawer-section:not(.drawer-section--collapsed) {
-  flex: 1;
-}
-
-.drawer-section.drawer-section--collapsed .drawer-section-content {
-  display: none;
-}
-
-.drawer-section-header {
-  padding: 8px 10px;
-  background: #1a3f72;
-  border-bottom: 1px solid #2b67ad;
-  color: #ffcf9f;
-  font-size: 12px;
-  font-weight: 600;
   cursor: pointer;
-  user-select: none;
 }
 
-.drawer-section-header::before {
-  content: "▼ ";
-  margin-right: 4px;
-}
-
-.drawer-section.drawer-section--collapsed .drawer-section-header::before {
-  content: "▶ ";
-}
-
-.drawer-section-header:hover {
+.explorer-header-btn:hover {
   background: #2b67ad;
 }
 
-.drawer-section-content {
-  padding: 8px;
-  overflow-y: auto;
-  flex: 1;
-  min-height: 0;
-}
-
-/* Operations List */
-#operations-list {
+.explorer-empty-state {
   display: flex;
+  min-height: 100%;
   flex-direction: column;
-  gap: 6px;
-  font-size: 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  text-align: center;
 }
 
-.operation-row {
+.explorer-empty-copy {
+  font-size: 12px;
+  color: #d5c5b6;
+  line-height: 1.45;
+}
+
+.explorer-empty-btn {
+  background: #c9561f;
+  color: #fff3e8;
+  border: 1px solid #df6326;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.explorer-empty-btn:hover {
+  background: #df6326;
+}
+
+#center-panel-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px;
-  background: #102a4f;
-  border-radius: 4px;
-  border: 1px solid #123461;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #2b67ad;
+  background: #102f57;
 }
 
-.operation-row:hover {
-  background: #1a3f72;
-  border-color: #2b67ad;
-}
-
-.operation-checkbox {
-  accent-color: #df6326;
-  cursor: pointer;
-}
-
-.operation-icon {
-  width: 20px;
-  display: inline-flex;
-  justify-content: center;
-  font-size: 14px;
-}
-
-.operation-path {
-  flex: 1;
-  color: #f6ece4;
-  word-break: break-word;
-  font-family: monospace;
-  font-size: 11px;
-}
-
-.operation-risk {
-  display: inline-block;
-  border-radius: 999px;
-  padding: 2px 8px;
-  font-size: 10px;
-  white-space: nowrap;
-}
-
-.operation-risk.low {
-  background: #1f4f8a;
-  color: #d9edff;
-}
-
-.operation-risk.medium {
-  background: #8a5d1f;
-  color: #ffe5bf;
-}
-
-.operation-risk.high {
-  background: #8a2f14;
-  color: #ffd8cc;
-}
-
-/* Undo History */
-#undo-history-list {
+#center-panel-title-wrap {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
+  min-width: 0;
 }
 
-.undo-history-item {
-  padding: 6px;
-  background: #102a4f;
-  border-radius: 4px;
-  border: 1px solid #123461;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-.undo-history-item:hover {
-  background: #1a3f72;
-  border-color: #2b67ad;
-}
-
-.undo-history-item input[type="radio"] {
-  accent-color: #df6326;
-  margin-right: 6px;
-}
-
-.undo-history-summary {
+#center-panel-title {
+  font-size: 13px;
+  font-weight: 600;
   color: #f6ece4;
 }
 
-.undo-history-time {
-  color: #a89a88;
+#center-panel-subtitle {
   font-size: 11px;
+  color: #c6b6a6;
 }
 
-.undo-history-details {
-  margin-left: 24px;
-  margin-top: 4px;
-  font-size: 11px;
-  color: #c9b4a5;
-}
-
-/* Drawer Footer */
-#drawer-footer {
+#center-panel-actions {
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
-#blueprint-approve-btn,
-#blueprint-reject-btn,
-#blueprint-inspect-btn {
-  background: #1f4f8a;
-  border: 1px solid #2b67ad;
+#auto-render-toggle-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
   color: #f6ece4;
+}
+
+#split-preview-toggle-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #f6ece4;
+}
+
+#auto-render-toggle {
+  accent-color: #df6326;
+}
+
+#split-preview-toggle {
+  accent-color: #df6326;
+}
+
+#center-panel-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+#center-panel-body.center-panel-body--split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+#center-panel-body.center-panel-body--split .center-surface {
+  position: relative;
+  inset: auto;
+  min-width: 0;
+}
+
+#center-panel-body.center-panel-body--split #editor-host {
+  border-right: 1px solid #2b67ad;
+}
+
+.center-surface {
+  position: absolute;
+  inset: 0;
+}
+
+#render-host {
+  background: #0f2240;
+  min-height: 0;
+}
+
+#render-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+}
+
+#render-empty-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  color: #d9c7b7;
+  font-size: 13px;
+  line-height: 1.5;
+  background: linear-gradient(180deg, rgba(10, 28, 52, 0.95), rgba(14, 39, 71, 0.98));
+  z-index: 1;
+}
+
+#center-panel-body.center-panel-body--split #render-empty-state {
+  position: absolute;
+}
+
+#ai-panel-output[hidden] {
+  display: none;
+}
+
+.context-inline-select {
+  min-width: 180px;
+  background: #123461;
+  color: #f6ece4;
+  border: 1px solid #2b67ad;
   border-radius: 4px;
-  padding: 6px 10px;
-  cursor: pointer;
+  padding: 5px 8px;
   font-size: 12px;
 }
 
-#blueprint-approve-btn:hover,
-#blueprint-reject-btn:hover,
-#blueprint-inspect-btn:hover {
+.context-inline-btn {
+  background: #1f4f8a;
+  color: #f6ece4;
+  border: 1px solid #2b67ad;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.context-inline-btn:hover:not(:disabled) {
   background: #2b67ad;
 }
 
-#blueprint-approve-btn:disabled,
-#blueprint-reject-btn:disabled,
-#blueprint-inspect-btn:disabled {
+.context-inline-btn:disabled {
   opacity: 0.55;
   cursor: not-allowed;
 }
 
-#blueprint-approve-btn:not(:disabled) {
-  background: #0b5d2a;
-  border-color: #0d7a38;
-}
-
-#blueprint-approve-btn:not(:disabled):hover {
-  background: #0d7a38;
-}
+/* ========== NEW UI COMPONENTS ========== */
 
 /* Composer Section */
 #composer-section {
@@ -1560,27 +1478,6 @@ html, body {
 }
 
 /* Responsive */
-@media (max-width: 1600px) {
-  #blueprint-drawer {
-    width: 560px;
-    min-width: 380px;
-  }
-}
-
-@media (max-width: 1366px) {
-  #blueprint-drawer {
-    width: 500px;
-    min-width: 340px;
-  }
-}
-
-@media (max-width: 1180px) {
-  #blueprint-drawer {
-    width: 440px;
-    min-width: 300px;
-  }
-}
-
 @media (max-width: 768px) {
   #composer-section {
     gap: 4px;
