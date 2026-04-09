@@ -6,6 +6,14 @@
 ![GPU Support](https://img.shields.io/badge/GPU-NVIDIA%2F%20AMD%2F%20Ryzen%20AI-blue)
 ![Privacy](https://img.shields.io/badge/Privacy-100%25%20Local-red)
 ![License](https://img.shields.io/badge/License-MIT-orange)
+![CI](https://github.com/paulcombs56-ops/WorkhorseIDE/actions/workflows/ci.yml/badge.svg)
+
+GitHub repository: https://github.com/paulcombs56-ops/WorkhorseIDE
+
+Repository governance:
+- Branch protection enabled on `main`
+- CI required via GitHub Actions workflow `CI`
+- Topics and repository description configured
 
 ## 🎯 Features
 
